@@ -4,7 +4,7 @@ classifiers = [
   "Operating System :: POSIX",
   "Programming Language :: Python :: 3",
 ]
-dependencies = []
+dependencies = ["numpy"]
 description = "Home-coded sorting algorithms for scaling exercises."
 dynamic = ["version"]
 keywords = []
