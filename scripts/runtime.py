@@ -120,7 +120,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     save_to = Path(args.save) if args.save is not None else None
 
-    input_sizes = np.unique(np.logspace(0.0, 7.0, num=50, endpoint=True, dtype=int))
+    input_sizes = np.unique(np.logspace(0.0, 5.0, num=25, endpoint=True, dtype=int))
     n_sizes = input_sizes.size
 
     execution_times = {
@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
     # Gather execution times whilst scaling input array sizes
     for i, array_size in enumerate(input_sizes):
+        print(f"Array size: {array_size}")
         input_data = generate_input_data(seed=args.seed, array_size=array_size)
 
         for method_name, method in [
@@ -138,6 +139,7 @@ if __name__ == "__main__":
             ("insertion", insertion_sort),
             ("merge", merge_sort),
         ]:
+            print(f"\t{method_name}", end=", ", flush=True)
             execution_times[method_name][i] = record_execution_time(
                 method, input_data, repeats=args.repeats
             )
