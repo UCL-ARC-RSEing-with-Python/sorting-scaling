@@ -1,4 +1,5 @@
 import argparse
+import timeit
 from collections.abc import Callable
 from pathlib import Path
 from typing import Literal
@@ -19,9 +20,9 @@ def generate_input_data(seed: int, array_size: int) -> list:
     `np.random.Generator.shuffle`.
     """
     rng = np.random.Generator(np.random.PCG64(seed=seed))
-
-    # Create the input data array here, shuffle it, and then return the shuffled
-    # values.
+    data = np.arange(array_size)
+    rng.shuffle(data)
+    return data
 
 
 def plot_scaling_results(
@@ -82,14 +83,12 @@ def record_execution_time(
         float:
             Execution time of the sorting `method` on the `input_data`.
     """
-    # Record the execution time for the method given, using the given number of repeats.
-    # Return the result.
-    #
-    # Hint: the command
-    # ```python
-    # method(input_data)
-    # ```
-    # will run the sorting algorithm.
+    execution_times = timeit.repeat(
+        "method(input_data)",
+        repeat=repeats,
+        globals={"method": method, "input_data": input_data},
+    )
+    return min(execution_times)
 
 
 if __name__ == "__main__":
@@ -105,7 +104,8 @@ if __name__ == "__main__":
         help="RNG seed to use when shuffling data arrays.",
     )
     parser.add_argument(
-        "repeats",
+        "-r",
+        "--repeats",
         type=int,
         default=1,
         help="Number of repeats for each call to a sorting algorithm. "
