@@ -143,6 +143,7 @@ if __name__ == "__main__":
             execution_times[method_name][i] = record_execution_time(
                 method, input_data, repeats=args.repeats
             )
+        print("\n", end="", flush=True)
 
     # Plot (and optionally save) your results!
     plot = plot_scaling_results(execution_times, input_sizes, save_to=save_to)
