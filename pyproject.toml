@@ -1,0 +1,28 @@
+[project]
+authors = [{ email = "william.graham@ucl.ac.uk", name = "William Graham"}]
+classifiers = [
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+]
+dependencies = []
+description = "Home-coded sorting algorithms for scaling exercises."
+dynamic = ["version"]
+keywords = []
+name = "sorting"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+dev = ["build", "pytest", "twine"]
+
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "setuptools-scm"]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+write_to = "src/sorting/_version.py"
+
+[tool.pytest.ini_options]
+addopts = ["--color=yes", "--import-mode=importlib", "--verbose"]
+testpaths = ["tests"]
