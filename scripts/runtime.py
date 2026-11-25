@@ -120,7 +120,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     save_to = Path(args.save) if args.save is not None else None
 
-    input_sizes = np.unique(np.logspace(0.0, 5.0, num=25, endpoint=True, dtype=int))
+    input_sizes = np.unique(
+        np.logspace(0.0, 8.0, num=9 * 3, base=2.0, endpoint=True, dtype=int)
+    )
     n_sizes = input_sizes.size
 
     execution_times = {
