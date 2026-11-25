@@ -4,9 +4,12 @@ import numpy as np
 import pytest
 
 from sorting.bubble import bubble_sort
+from sorting.insertion import insertion_sort
 
 
-@pytest.mark.parametrize("algorithm", (bubble_sort,), ids=("bubble",))
+@pytest.mark.parametrize(
+    "algorithm", (bubble_sort, insertion_sort), ids=("bubble", "insertion")
+)
 @pytest.mark.parametrize(
     ("input", "expected_array"),
     [
