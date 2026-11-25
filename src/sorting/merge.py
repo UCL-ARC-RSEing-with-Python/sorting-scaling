@@ -24,13 +24,17 @@ def merge_sort(array: np.ndarray) -> np.ndarray:
     the shorter arrays, we combine the answers in an efficient manner to
     produce the result.
     """
-    if K := len(array) == 1:
-        return
+    # := is the Walrus operator. It's use here is equivalent to
+    # ```python
+    # K = len(array)
+    # if K == 1:
+    #   ...
+    # ```
+    if (K := len(array)) == 1:
+        return array
 
-    left, right = (
-        merge_sort(array[: K // 2]),
-        merge_sort(array[K // 2 :]),
-    )
+    left = merge_sort(array[: K // 2])
+    right = merge_sort(array[K // 2 :])
     # K might be odd, so we do actually need to compute the lengths of the
     # two 'halves' in case one is greater than the other.
     L = len(left)

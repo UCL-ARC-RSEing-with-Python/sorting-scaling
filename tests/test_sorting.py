@@ -5,10 +5,13 @@ import pytest
 
 from sorting.bubble import bubble_sort
 from sorting.insertion import insertion_sort
+from sorting.merge import merge_sort
 
 
 @pytest.mark.parametrize(
-    "algorithm", (bubble_sort, insertion_sort), ids=("bubble", "insertion")
+    "algorithm",
+    (bubble_sort, insertion_sort, merge_sort),
+    ids=("bubble", "insertion", "merge"),
 )
 @pytest.mark.parametrize(
     ("input", "expected_array"),
