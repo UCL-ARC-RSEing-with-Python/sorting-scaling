@@ -99,13 +99,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "seed",
         type=int,
+        nargs="?",
         default=0,
         help="RNG seed to use when shuffling data arrays.",
     )
     parser.add_argument(
         "repeats",
         type=int,
-        default=5,
+        default=2,
         help="Number of repeats for each call to a sorting algorithm. "
         "Minimum execution time across all repeats is reported.",
     )
@@ -133,7 +134,7 @@ if __name__ == "__main__":
 
     # Gather execution times whilst scaling input array sizes
     for i, array_size in enumerate(input_sizes):
-        print(f"Array size: {array_size}")
+        print(f"({i} / {n_sizes}) Array size: {array_size}")
         input_data = generate_input_data(seed=args.seed, array_size=array_size)
 
         for method_name, method in [
