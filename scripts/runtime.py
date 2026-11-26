@@ -49,11 +49,21 @@ def plot_scaling_results(
         plt.Figure:
             Figure object containing the plot.
     """
-    fig = plt.figure()
+    fig, ax = plt.subplots(1, 1)
+    ax: plt.Axes
 
-    # Create your plot(s) in a manner that you see fit.
-    # One axes for all 3 algorithms? Separate axes that share the x-values?
-    # Up to you, just make sure it's readable!
+    ax.semilogx(
+        input_sizes, execution_times["bubble"], "blue", base=2.0, label="Bubble"
+    )
+    ax.semilogx(
+        input_sizes, execution_times["insertion"], "red", base=2.0, label="Insertion"
+    )
+    ax.semilogx(input_sizes, execution_times["merge"], "green", base=2.0, label="Merge")
+
+    ax.set_xlabel(r"List size, $N$")
+    ax.set_ylabel("Execution time, s")
+
+    ax.legend()
 
     if save_to:
         fig.savefig(save_to)
