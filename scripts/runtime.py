@@ -56,6 +56,7 @@ def plot_scaling_results(
 
     if save_to:
         fig.savefig(save_to)
+    return fig
 
 
 def record_execution_time(
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "repeats",
         type=int,
-        default=2,
+        default=1,
         help="Number of repeats for each call to a sorting algorithm. "
         "Minimum execution time across all repeats is reported.",
     )
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     save_to = Path(args.save) if args.save is not None else None
 
     input_sizes = np.unique(
-        np.logspace(0.0, 8.0, num=9, base=2.0, endpoint=True, dtype=int)
+        np.logspace(0.0, 6.0, num=6 * 2 - 1, base=2.0, endpoint=True, dtype=int)
     )
     n_sizes = input_sizes.size
 
@@ -134,7 +135,7 @@ if __name__ == "__main__":
 
     # Gather execution times whilst scaling input array sizes
     for i, array_size in enumerate(input_sizes):
-        print(f"({i} / {n_sizes}) Array size: {array_size}")
+        print(f"({i + 1} / {n_sizes}) Array size: {array_size}")
         input_data = generate_input_data(seed=args.seed, array_size=array_size)
 
         for method_name, method in [
