@@ -52,13 +52,11 @@ def plot_scaling_results(
     fig, ax = plt.subplots(1, 1)
     ax: plt.Axes
 
-    ax.semilogx(
-        input_sizes, execution_times["bubble"], "blue", base=2.0, label="Bubble"
-    )
-    ax.semilogx(
+    ax.loglog(input_sizes, execution_times["bubble"], "blue", base=2.0, label="Bubble")
+    ax.loglog(
         input_sizes, execution_times["insertion"], "red", base=2.0, label="Insertion"
     )
-    ax.semilogx(input_sizes, execution_times["merge"], "green", base=2.0, label="Merge")
+    ax.loglog(input_sizes, execution_times["merge"], "green", base=2.0, label="Merge")
 
     ax.set_xlabel(r"List size, $N$")
     ax.set_ylabel("Execution time, s")
