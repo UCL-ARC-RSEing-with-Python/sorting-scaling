@@ -32,14 +32,14 @@ The script will error when it tries to create the plot, since we haven't impleme
    Is it a power-law (polynomial) relationship?
    Is it exponential?
    Can you format your plot in such a way as to help you back up your theory?
-   > [!TIP]
-   > If you are struggling to figure out what the scaling on `merge_sort` is, consider plotting $\frac{t_{exe}}{\log N}$ against $N$ instead of just $t_{exe}$ against $N$.
 3. Based on your results, which of the sorting algorithms do you expect to be the best (in terms of minimising code run-time) for very large input sizes?
    What about for smaller input sizes?
 
-> [!IMPORTANT]
-> Leave a comment on this issue containing your plot and your predictions about the scaling of the three sorting algorithms.
-> You might also want to explain how you came to the conclusions that you did.
+> [!TIP]
+> If you are struggling to figure out what the scaling on `merge_sort` is, consider plotting $\frac{t_{exe}}{\log N}$ against $N$ instead of just $t_{exe}$ against $N$.
+
+Leave a comment on this issue containing your plot and your predictions about the scaling of the three sorting algorithms.
+You might also want to explain how you came to the conclusions that you did.
 
 ## (Stretch) Control Variables
 
