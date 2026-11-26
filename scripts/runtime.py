@@ -141,8 +141,21 @@ if __name__ == "__main__":
         default=None,
         help="File to save generated scaling plots to.",
     )
+    parser.add_argument(
+        "-o",
+        "--how",
+        type=str,
+        default="random",
+        help="How the input data should be sorted. "
+        "'random', 'sorted', or 'anti-sorted' are valid options.",
+    )
 
     args = parser.parse_args()
+    if args.how not in ["random", "sorted", "anti-sorted"]:
+        raise ValueError(
+            f"Argument value for HOW ({args.how}) "
+            "not recognised, check --help for valid options."
+        )
     save_to = Path(args.save) if args.save is not None else None
 
     input_sizes = np.unique(
@@ -159,7 +172,9 @@ if __name__ == "__main__":
     # Gather execution times whilst scaling input array sizes
     for i, array_size in enumerate(input_sizes):
         print(f"({i + 1} / {n_sizes}) Array size: {array_size}")
-        input_data = generate_input_data(seed=args.seed, array_size=array_size)
+        input_data = generate_input_data(
+            seed=args.seed, array_size=array_size, how=args.how
+        )
 
         for method_name, method in [
             ("bubble", bubble_sort),

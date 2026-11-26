@@ -1,10 +1,14 @@
 # Solution
 
+> [!NOTE]
+> Code solutions are present in the appropriate `.py` files.
+> This document only contains written explanations / answers to the issue tasks.
+
 It is advisable to produce a plot that uses log-log axes.
 Base 2 will provide the clearest picture in terms of how the input sizes we were using are scaling, but using any logarithm base will still allow for easy estimation of the scaling relationship.
 The plot below covers the range $N\in[2^0, 2^8]$, slightly wider in log-space than that in the original script to make the conclusions more obvious (however going up to $N\leq 2^6$ should allow similar conclusions to be drawn).
 
-![Scaling results for the execution time as the input array's size is increased.](./pow-range-0-8.png)
+![Scaling results for the execution time as the input array's size is increased.](./random-pow-range-0-8.png)
 
 The the bubble and insertion sorts, the theoretical worst-case scaling is $O(N^2)$.
 Known heuristics however indicate that both methods perform disproportionately well at smaller array sizes (where other factors like buffer creation etc) are significant enough to detriment other methods.
@@ -29,14 +33,12 @@ Therefore we should be careful when considering _how_ we scale our inputs so tha
 It is for this reason that the "worst-case" theoretical scaling is so important, and is an important feature of an algorithm that is derived analytically when being designed.
 
 Modifying the script to have the input data provided already sorted will demonstrate this.
+The plot below is for when we use already sorted data, for example:
 
-1. Think about what this means for each of the algorithms.
-   Could the original ordering of the input values have an impact on $t_{exe}$ for one (or more) of the sorting algorithms?
-   Why / why not?
-2. Write another function (or modify the existing function) so that instead of returning the values `0:N` in a random order, they are returned already sorted.
-   Then, re-run your experiment from before and examine the scaling relationships.
-   Has anything changed?
-   Does this fit your expectations from part (1)?
-3. Write another function (or modify the existing functions) so that instead of returning the values `0:N` in a random order, they are returned in _reverse_ order (that is, from `N-1` through to `0`).
-   Again, re-run your experiment from before using this form for the input data.
-   What do you notice?
+![The scaling observed when providing already-sorted data as an input.](./sorted-pow-range-0-8.png)
+
+Notice how in this case, bubble and insertion sort perform the best... with bubble being the one that performed the best at large array sizes (though granted, this is only because it knows it can "stop" early)!
+
+Using completely un-sorted data tells the opposite story; pushing all three algorithms to their theoretical worst-case situations.
+The script takes a **very** long time to run when this is done, however the result is that merge sort begins to pull ahead as the best option at a lower value of $N$ than when using the random-order input data.
+Bubble and insertion (asymptotically) perform about as well as each other, though insertion remains slightly better than bubble.
