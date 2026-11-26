@@ -146,7 +146,7 @@ if __name__ == "__main__":
             print(f"\t{method_name}", end=": ", flush=True)
             t_exe = record_execution_time(method, input_data, repeats=args.repeats)
             execution_times[method_name][i] = t_exe
-            print(f"{t_exe}s", end="\n", flush=True)
+            print(f"{t_exe:.2e}s", end="\n", flush=True)
         print("\n", end="", flush=True)
 
     # Plot (and optionally save) your results!

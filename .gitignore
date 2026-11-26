@@ -179,3 +179,8 @@ pyrightconfig.json
 
 # Avoid automatic versioning issues without upstream tagging
 src/**/_version.py
+
+# Avoid figure format outputs
+**/*.png
+**/*.svg
+**/*.jpeg
