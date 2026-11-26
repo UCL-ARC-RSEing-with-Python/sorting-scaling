@@ -1,8 +1,5 @@
-import numpy as np
-
-
-def merge_sort(array: np.ndarray) -> np.ndarray:
-    """Sort the `array` input into numerical order via Merge Sort.
+def merge_sort(values: list) -> list:
+    """Sort the `values` input into numerical order via Merge Sort.
 
     [Merge sort](https://en.wikipedia.org/wiki/Merge_sort) sorts values
     in a recursive fashion. Given an array of values to sort, merge
@@ -30,16 +27,16 @@ def merge_sort(array: np.ndarray) -> np.ndarray:
     # if K == 1:
     #   ...
     # ```
-    if (K := len(array)) == 1:
-        return array
+    if (K := len(values)) == 1:
+        return values
 
-    left = merge_sort(array[: K // 2])
-    right = merge_sort(array[K // 2 :])
+    left = merge_sort(values[: K // 2])
+    right = merge_sort(values[K // 2 :])
     # K might be odd, so we do actually need to compute the lengths of the
     # two 'halves' in case one is greater than the other.
     L = len(left)
     R = len(right)
-    sorted_array = np.zeros_like(array)
+    sorted_values = [None] * K
 
     next_left_index = 0
     next_right_index = 0
@@ -51,10 +48,10 @@ def merge_sort(array: np.ndarray) -> np.ndarray:
         # Determine whether the next element in the left or right array is to
         # be placed into the combined array next
         if least_left_value < least_right_value:
-            sorted_array[current_sorted_index] = least_left_value
+            sorted_values[current_sorted_index] = least_left_value
             next_left_index += 1
         else:
-            sorted_array[current_sorted_index] = least_right_value
+            sorted_values[current_sorted_index] = least_right_value
             next_right_index += 1
         current_sorted_index += 1
 
@@ -64,8 +61,8 @@ def merge_sort(array: np.ndarray) -> np.ndarray:
     # to place all the remaining values in the OTHER array into the combined
     # array.
     if next_left_index < L:
-        sorted_array[current_sorted_index:] = left[next_left_index:]
+        sorted_values[current_sorted_index:] = left[next_left_index:]
     else:
-        sorted_array[current_sorted_index:] = right[next_right_index:]
+        sorted_values[current_sorted_index:] = right[next_right_index:]
 
-    return sorted_array
+    return sorted_values

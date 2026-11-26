@@ -1,6 +1,5 @@
 from collections.abc import Callable
 
-import numpy as np
 import pytest
 
 from sorting.bubble import bubble_sort
@@ -14,7 +13,7 @@ from sorting.merge import merge_sort
     ids=("bubble", "insertion", "merge"),
 )
 @pytest.mark.parametrize(
-    ("input", "expected_array"),
+    ("input_values", "expected_array"),
     [
         pytest.param([0, 1, 2, 3, 4], [0, 1, 2, 3, 4], id="Already sorted"),
         pytest.param([4, 3, 2, 1, 0], [0, 1, 2, 3, 4], id="Anti-sorted"),
@@ -30,14 +29,14 @@ from sorting.merge import merge_sort
 )
 def test_sorting_algorithms(
     algorithm: Callable,
-    input: np.ndarray,
-    expected_array: np.ndarray,
+    input_values: list,
+    expected_array: list,
 ) -> None:
     """Test the sorting algorithms actually produce the sorted array."""
-    # Saves needing to write out np.array in all the params
-    input = np.array(input)
-    expected_array = np.array(expected_array)
+    to_sort = list(input_values)
+    expected_array = list(expected_array)
 
-    result = algorithm(expected_array)
+    result = algorithm(to_sort)
 
-    assert np.all(result == expected_array)
+    assert result == expected_array
+    assert to_sort == input_values, "In-place changes have occurred!"

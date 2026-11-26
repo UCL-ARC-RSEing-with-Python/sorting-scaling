@@ -11,8 +11,8 @@ from sorting.insertion import insertion_sort
 from sorting.merge import merge_sort
 
 
-def generate_input_data(seed: int, array_size: int) -> np.ndarray:
-    """Generate an array containing the integers `0:array_size` in a random order.
+def generate_input_data(seed: int, array_size: int) -> list:
+    """Generate a `list` containing the integers `0:array_size` in a random order.
 
     The output array contains the integers from `0` to `array_size-1` (inclusive).
     The order of the elements is random, determined by the `seed` and a call to
@@ -59,7 +59,7 @@ def plot_scaling_results(
 
 
 def record_execution_time(
-    method: Callable[[np.ndarray], np.ndarray], input_data: np.ndarray, *, repeats: int
+    method: Callable[[list], list], input_data: list, *, repeats: int
 ) -> float:
     """Record the execution time of a sorting method.
 
@@ -68,10 +68,10 @@ def record_execution_time(
     execution time being returned by this function.
 
     Args:
-        method: Callable[[np.ndarray], np.ndarray]
+        method: Callable[[list], list]
             One of `bubble_sort`, `insertion_sort`, or `merge_sort`. The sorting
             algorithm that will be executed on the `input_data`.
-        input_data: np.ndarray
+        input_data: list
             Input data to pass to the sorting method.
         repeats: int
             Number of repeats to run when recording execution time. Minimum
