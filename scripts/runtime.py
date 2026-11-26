@@ -12,16 +12,30 @@ from sorting.insertion import insertion_sort
 from sorting.merge import merge_sort
 
 
-def generate_input_data(seed: int, array_size: int) -> list:
-    """Generate a `list` containing the integers `0:array_size` in a random order.
+def generate_input_data(
+    seed: int,
+    array_size: int,
+    *,
+    how: Literal["random", "sorted", "anti-sorted"] = "random",
+) -> list:
+    """Generate a `list` containing the integers `0:array_size` in some order.
 
     The output array contains the integers from `0` to `array_size-1` (inclusive).
-    The order of the elements is random, determined by the `seed` and a call to
-    `np.random.Generator.shuffle`.
+
+    `how` dictates the ordering of the elements when the array is returned:
+    - `"random"`: The order of the elements is random, determined by the `seed`
+      and a call to `np.random.Generator.shuffle`.
+    - `"sorted"`: Elements are returned sorted (`0` first and ascending to
+      `array_size-1`).
+    - `"anti-sorted"`: Elements are returned in reverse order (`array_size-1` first
+      and descending to `0`).
     """
-    rng = np.random.Generator(np.random.PCG64(seed=seed))
     data = list(range(array_size))
-    rng.shuffle(data)
+    if how == "random":
+        rng = np.random.Generator(np.random.PCG64(seed=seed))
+        rng.shuffle(data)
+    if how == "anti-sorted":
+        data.reverse()
     return data
 
 
