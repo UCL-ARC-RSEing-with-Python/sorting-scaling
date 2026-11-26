@@ -142,10 +142,10 @@ if __name__ == "__main__":
             ("insertion", insertion_sort),
             ("merge", merge_sort),
         ]:
-            print(f"\t{method_name}", end=", ", flush=True)
-            execution_times[method_name][i] = record_execution_time(
-                method, input_data, repeats=args.repeats
-            )
+            print(f"\t{method_name}", end=": ", flush=True)
+            t_exe = record_execution_time(method, input_data, repeats=args.repeats)
+            execution_times[method_name][i] = t_exe
+            print(f"{t_exe}s", end="\n", flush=True)
         print("\n", end="", flush=True)
 
     # Plot (and optionally save) your results!
