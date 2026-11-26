@@ -20,7 +20,7 @@ def generate_input_data(seed: int, array_size: int) -> list:
     `np.random.Generator.shuffle`.
     """
     rng = np.random.Generator(np.random.PCG64(seed=seed))
-    data = np.arange(array_size)
+    data = list(range(array_size))
     rng.shuffle(data)
     return data
 
