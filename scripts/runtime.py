@@ -60,6 +60,7 @@ def plot_scaling_results(
 
     ax.set_xlabel(r"List size, $N$")
     ax.set_ylabel("Execution time, s")
+    ax.grid(visible=True, which="both")
 
     ax.legend()
 
